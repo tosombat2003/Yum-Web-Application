@@ -1,45 +1,73 @@
-# 🍽 ระบบจัดการร้านยำ  
+# 🥗Yum Aeb Zaap  (ยำแอบแซ่บ) - Web application
 
-## 📌 รายละเอียดโปรเจค 
-เป็นโปรเจคในรายวิชาเว็บแอปพลิเคชั่น ปี 2 (ปีการศึกษา 2566)<br>
-เว็บแอปพลิเคชันในลักษณะ ecommerce ระบบร้านยำที่ช่วยให้ลูกค้าสามารถสั่งหลายเมนูใน1ออเดอร์ สามารถเพิ่มราบละเอียดและท้อปปิ้งได้ <br>
-
-## 🚀 ฟีเจอร์หลัก  
-✅ ลูกค้าสามารถเลือกหลายเมนูในหนึ่งออเดอร์  
-✅ เลือกรายละเอียดย่อยของสินค้า และท็อปปิ้งเพิ่มเติมได้  
-✅ ดูเมนูที่เลือกไว้และกดชำระเงิน<br>
-✅ ระบบชำระเงิน<br>
-✅ แอดมินจัดการหลังร้าน เพิ่ม/ลดสินค้า รับออเดอร์และดูบิลย้อนหลังได้<br>
+> A full-stack e-commerce web application simulating an online ordering system for a Thai salad restaurant (yum) — built as a paired project for a Web Applications Development course.
 
 ---
 
-## 🛠 เทคโนโลยีที่ใช้  
-💻 **Frontend:** HTML, CSS    
-🖥 **Backend:** PHP  
-🗄 **Database:** MySQL  
+## 📖 About
+
+Yum Aeb Zaap - Web application is a restaurant ordering system that lets customers browse the menu, build an order with multiple items, customize each dish, and complete a payment — all in one session. On the backend, an admin panel gives the shop owner full control over the menu, incoming orders, and order history.
 
 ---
 
-## 📌 วิธีติดตั้งและใช้งาน  
+## ✨ Features
 
-### 🔹 1. Clone โปรเจค  
-```sh
-git clone https://github.com/username/project-name.git  
-cd project-name
-``` 
-### 🔹2. ตั้งค่า Database
-สร้างฐานข้อมูล MySQL
-นำเข้าไฟล์ database.sql
-แก้ไขการเชื่อมต่อฐานข้อมูลใน config.php
-### 🔹 3. รันโปรเจคผ่านเซิร์ฟเวอร์จำลอง (XAMPP, Laragon)
-เปิด Apache และ MySQL
-วางไฟล์ไว้ใน htdocs (สำหรับ XAMPP)
-เข้าใช้งานผ่านเบราว์เซอร์ที่
-👉 http://localhost/project-name
+**Customer**
+- 🛒 **Multi-item ordering** — add multiple menu items in a single order
+- 🌶️ **Item customization** — choose toppings and portion details for each dish
+- 🧾 **Cart & checkout** — review selected items and proceed to payment
+
+**Admin**
+- ➕ **Menu management** — add, edit, and remove menu items
+- 📋 **Order management** — receive and manage incoming orders
+- 📜 **Order history** — view past orders and bills
 
 ---
 
-## 👾 ตัวอย่างหน้าเว็บ  
+## 🛠️ Tech Stack
 
-หน้าหลักของลูกค้า : https://yum.lovestoblog.com/menu.php <br>
-หน้าหลังร้าน : https://yum.lovestoblog.com/admin.php <br>
+| Layer | Technology |
+|---|---|
+| Frontend | HTML, CSS |
+| Backend | PHP |
+| Database | MySQL |
+
+---
+
+## ⚙️ Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/web-yam.git
+   cd yum-web-application
+   ```
+2. Set up a local server — recommended: [XAMPP](https://www.apachefriends.org/) or [MAMP](https://www.mamp.info/)
+3. Move the project folder to your server's root directory (e.g. `htdocs` for XAMPP)
+4. Import the database
+   - Open **phpMyAdmin**
+   - Create a new database (e.g. `yum`)
+   - Import the provided `.sql` file
+5. Update database credentials in the config file
+   ```php
+   // connect/connection.php
+   $host = 'localhost';
+   $db   = 'yum';
+   $user = 'root';
+   $pass = '';
+   ```
+6. Open your browser and go to `http://localhost/web-yam`
+
+---
+
+## 👥 Contributors
+
+| Name | Role |
+|---|---|
+| Suchawadee Tosombat | Developer |
+| Panpradap Boontan | Developer |
+
+---
+
+## 💻 Website Previews
+* **Customer View:** : https://yum.lovestoblog.com/menu.php <br>
+* **Admin Dashboard:** : https://yum.lovestoblog.com/admin.php <br>
