@@ -69,5 +69,5 @@ Yum Aeb Zaap - Web application is a restaurant ordering system that lets custome
 ---
 
 ## 💻 Website Previews
-* **Customer View:** : https://yum.lovestoblog.com/menu.php <br>
+* **Customer View:** : https://yum.lovestoblog.com/home.html <br>
 * **Admin Dashboard:** : https://yum.lovestoblog.com/admin.php <br>
