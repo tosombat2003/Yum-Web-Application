@@ -41,5 +41,5 @@ cd project-name
 
 ## 👾 ตัวอย่างหน้าเว็บ  
 
-หน้าหลักของลูกค้า : http://parnweb.lovestoblog.com/yum/home.html <br>
-หน้าหลังร้าน : http://parnweb.lovestoblog.com/yum/admin.php <br>
+หน้าหลักของลูกค้า : https://yum.lovestoblog.com/menu.php <br>
+หน้าหลังร้าน : https://yum.lovestoblog.com/admin.php <br>
