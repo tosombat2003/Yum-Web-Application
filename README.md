@@ -38,7 +38,7 @@ Yum Aeb Zaap - Web application is a restaurant ordering system that lets custome
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/YOUR_USERNAME/web-yam.git
+   git clone https://github.com/YOUR_USERNAME/yum-web-application.git
    cd yum-web-application
    ```
 2. Set up a local server — recommended: [XAMPP](https://www.apachefriends.org/) or [MAMP](https://www.mamp.info/)
@@ -55,7 +55,7 @@ Yum Aeb Zaap - Web application is a restaurant ordering system that lets custome
    $user = 'root';
    $pass = '';
    ```
-6. Open your browser and go to `http://localhost/web-yam`
+6. Open your browser and go to `http://localhost/home.html`
 
 ---
 
