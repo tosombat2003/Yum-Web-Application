@@ -35,12 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $topping_string = !empty($topping_list) ? implode(", ", $topping_list) : null;
 
-    // เพิ่มข้อมูลลงตาราง orders
-    $order_sql = "INSERT INTO orders (menu_id, menu_name, menu_price, noodle, spicy, fermented_fish, pachana, topping, total_price, count) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+// รับค่า session_id ปัจจุบันของเบราว์เซอร์ลูกค้า
+    $session_id = session_id();
+
+    // แก้ไขคำสั่ง SQL เพิ่มฟิลด์ session_id เข้าไปตอนคิวรี่
+    $order_sql = "INSERT INTO orders (session_id, menu_id, menu_name, menu_price, noodle, spicy, fermented_fish, pachana, topping, total_price, count) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($order_sql);
-    $stmt->bind_param("isdsssssid", $menu_id, $menu_name, $menu_price, $noodle, $spicy, $fermented_fish, $pachana, $topping_string, $total_price, $quantity);
+    // เพิ่ม "s" ด้านหน้าสุด และส่ง $session_id เข้าไปตัวแรก
+    $stmt->bind_param("sisdsssssid", $session_id, $menu_id, $menu_name, $menu_price, $noodle, $spicy, $fermented_fish, $pachana, $topping_string, $total_price, $quantity);
 
     // บันทึกข้อมูลลงฐานข้อมูล
     if ($stmt->execute()) {

@@ -17,8 +17,37 @@ while ($row = $result->fetch_assoc()) {
 
 if (isset($_POST['finish_order'])) {
     $order_id = $_POST['order_id'];
-    $conn->query("UPDATE orders_admin SET status = 'done' WHERE order_id = '$order_id'");
-    echo "<script>alert('อัพเดตสถานะสำเร็จ!'); window.location.href='admin.php';</script>";
+
+    // 1. ดึงข้อมูลรายการอาหารและจำนวนในออเดอร์นี้
+    $stmt = $conn->prepare("SELECT menu_name, count FROM orders_admin WHERE order_id = ?");
+    $stmt->bind_param("s", $order_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // 2. เตรียมคำสั่ง SQL สำหรับหักสต็อก
+    $update_stock_stmt = $conn->prepare("UPDATE menu SET stock = stock - ? WHERE name = ?");
+
+    // 3. วนลูปหักสต็อกตามรายการที่สั่ง
+    while ($row = $result->fetch_assoc()) {
+        $menu_name = $row['menu_name'];
+        $count = $row['count'];
+        
+        $update_stock_stmt->bind_param("is", $count, $menu_name);
+        $update_stock_stmt->execute();
+    }
+
+    $stmt->close();
+    $update_stock_stmt->close();
+
+    // 4. อัปเดตสถานะออเดอร์เป็น done
+    // (ใช้ prepared statement เพื่อความปลอดภัยด้วยเลย)
+    $update_status_stmt = $conn->prepare("UPDATE orders_admin SET status = 'done' WHERE order_id = ?");
+    $update_status_stmt->bind_param("s", $order_id);
+    $update_status_stmt->execute();
+    $update_status_stmt->close();
+
+    // เด้งกลับมาที่หน้า Order เหมือนเดิมจะได้กดออเดอร์ถัดไปได้ง่ายๆ
+    echo "<script>alert('อัพเดตสถานะและตัดสต็อกเรียบร้อย!'); window.location.href='admin_conf.php';</script>";
     exit();
 }
 ?>

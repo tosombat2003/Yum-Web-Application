@@ -2,23 +2,26 @@
 session_start();
 include 'connect/connection.php';
 
-// ลบสินค้ารายชิ้น
+$session_id = session_id();
+
+// 1. จุดลบสินค้ารายชิ้น: แก้ไข SQL ให้ตรวจสอบ session_id
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $conn->query("DELETE FROM orders WHERE id=$id");
+    $id = intval($_GET['delete']);
+    $conn->query("DELETE FROM orders WHERE id=$id AND session_id='$session_id'");
     header("Location: cart.php");
     exit();
 }
 
-// ล้างตะกร้าทั้งหมด
+// 2. จุดล้างตะกร้าทั้งหมด: แก้ไข SQL ให้ลบเฉพาะของตัวเอง
 if (isset($_GET['clear'])) {
-    $conn->query("DELETE FROM orders");
+    $conn->query("DELETE FROM orders WHERE session_id='$session_id'");
     header("Location: cart.php");
     exit();
 }
 
-// ดึงข้อมูลจากตาราง orders
-$sql = "SELECT id, menu_name, menu_price, noodle, spicy, fermented_fish, pachana, topping, count, total_price FROM orders";
+
+// 3. จุดดึงข้อมูลมาแสดงในตาราง: เพิ่มเงื่อนไข WHERE session_id
+$sql = "SELECT id, menu_name, menu_price, noodle, spicy, fermented_fish, pachana, topping, count, total_price FROM orders WHERE session_id='$session_id'";
 $result = $conn->query($sql);
 if (isset($_GET['confirm'])) {
     // ดึงข้อมูลจากตาราง orders
@@ -107,13 +110,14 @@ if (isset($_GET['confirm'])) {
             <br>
             <a href="cart.php?clear=true" class="clear-cart"
                 onclick="return confirm('ต้องการลบสินค้าทั้งหมดหรือไม่?');">ล้างตะกร้าทั้งหมด</a>
+           <center>
+        <a href="payment.html" class="btn">ยืนยันคำสั่งซื้อ</a>
+    </center>
         <?php } else { ?>
             <p>ไม่มีสินค้าในตะกร้า</p>
         <?php } ?>
     </div>
-    <center>
-        <a href="payment.html" class="btn">ยืนยันคำสั่งซื้อ</a>
-    </center>
+
 
 </body>
 

@@ -2,8 +2,10 @@
 session_start();
 include 'connect/connection.php';
 
-// ดึงข้อมูลจากตะกร้า
-$sql = "SELECT * FROM orders";
+$session_id = session_id();
+
+// 1. จุดดึงข้อมูลสินค้าจากตะกร้า: เพิ่มเงื่อนไข WHERE
+$sql = "SELECT * FROM orders WHERE session_id = '$session_id'";
 $result = $conn->query($sql);
 $total_price = 0;
 $orders = [];
@@ -45,8 +47,8 @@ if (isset($_POST['confirm_payment'])) {
         $stmt->close();
     }
 
-    // ล้างตะกร้าหลังบันทึก
-    $conn->query("DELETE FROM orders");
+    // 2. จุดล้างตะกร้าสินค้าหลังจากย้ายข้อมูลไป orders_admin สำเร็จ: เพิ่มเงื่อนไข WHERE เพื่อให้ลบเฉพาะของลูกค้าคนนั้นๆ
+$conn->query("DELETE FROM orders WHERE session_id = '$session_id'");
 
     // ส่งไปหน้า wait.php พร้อม order_id
     header("Location: wait.php?order_id=$order_id");
