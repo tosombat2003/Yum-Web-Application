@@ -64,7 +64,7 @@ Yum Aeb Zaap - Web application is a restaurant ordering system that lets custome
 | Name | Role |
 |---|---|
 | Suchawadee Tosombat | Developer |
-| Panpradap Boontan | Developer |
+| Panpradap Buntan | Developer |
 
 ---
 
